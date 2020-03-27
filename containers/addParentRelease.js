@@ -10,7 +10,7 @@ const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
 };
 
-
+const dateFormat = "DD-MM-YYYY";
 
 export default class AddParentRelease extends Component {
 
@@ -38,11 +38,12 @@ export default class AddParentRelease extends Component {
         console.log("Date", values['startDate'].format('YYYY-MM-DD'));
         let arr = this.state.localPRItems;
         let prObj = {
+            key: new Date().getTime(),
             version: values.version,
             status: "",
             progress: "",
-            startDate: values['startDate'].format('DD-MM-YYYY'),
-            endDate: values['endDate'].format('DD-MM-YYYY'),
+            startDate: values['startDate'].format(dateFormat),
+            endDate: values['endDate'].format(dateFormat),
             description: values.description
         }
 
