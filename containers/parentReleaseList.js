@@ -1,10 +1,14 @@
 import React, { Component, useState, version } from "react";
-import { Table, Tag, Form, Input, InputNumber, Popconfirm, Progress, DatePicker, Select, Slider } from 'antd';
+import {
+    Table, Tag, Form, Input, InputNumber, Popconfirm, Row, Col, Dropdown,
+    Progress, DatePicker, Select, Slider, Popover, Button, Modal, Badge
+} from 'antd';
 import AddParentRelease from './addParentRelease';
 import moment from 'moment';
+import AddChildRelease from "./addChildRelease";
+import ChildReleaseList from "./ChildReleaseList";
 
 const dateFormat = "DD-MM-YYYY";
-
 
 
 
@@ -12,6 +16,7 @@ export default class ReleaseList extends Component {
 
     constructor(props) {
         super(props);
+        let _this = this;
         this.state = {
             editingKey: '',
             editVersion: "",
@@ -20,6 +25,8 @@ export default class ReleaseList extends Component {
             editstartDate: "",
             editEndDate: "",
             editDescription: "",
+            modalVisible: false,
+            currentRecord: {},
             columns: [
                 {
                     title: 'Version No',
@@ -72,6 +79,15 @@ export default class ReleaseList extends Component {
                     key: 'action',
                     render: (text, record) => {
                         const editable = this.isEditing(record);
+                        const Content = (
+                            <div>
+                                <Row>
+                                    <Col span={8}><a disabled={this.state.editingKey !== ''} onClick={() => this.edit(record)}>Edit</a></Col>
+                                    <Col span={8}><a disabled={this.state.editingKey !== ''} onClick={() => this.addChildItem(record)}>Add</a></Col>
+                                    <Col span={8}><a disabled={this.state.editingKey !== ''} onClick={() => this.deleteItem(record)}>Delete</a></Col>
+                                </Row>
+                            </div>
+                        );
                         return editable ? (
                             <span>
                                 <a
@@ -88,16 +104,30 @@ export default class ReleaseList extends Component {
                                 </Popconfirm>
                             </span>
                         ) : (
-                                <a disabled={this.state.editingKey !== ''} onClick={() => this.edit(record)}>
-                                    Edit
-                                </a>
+                                <Popover content={Content} title="Title" trigger="hover">
+                                    <Button>Hover me</Button>
+                                </Popover>
                             );
                     }
                 }
             ],
+
             listDataSrc: [],
             isEdit: false
         }
+    }
+
+
+    addChildItem = (rec) => {
+        console.log("children ", rec)
+        this.setState({
+            modalVisible: true,
+            currentRecord: rec
+        })
+    }
+
+    deleteItem = (rec) => {
+
     }
 
     componentDidMount() {
@@ -119,7 +149,7 @@ export default class ReleaseList extends Component {
         ...restProps
     }) => {
         // console.log("started 1", children)
-        console.log("started 2", record)
+        // console.log("started 2", record)
         // console.log("started 4", dataIndex)
         // console.log("started 5", title)
         let inputNode;
@@ -189,6 +219,8 @@ export default class ReleaseList extends Component {
         })
     }
 
+
+
     handleSlider = (value) => {
         console.log("slider Vlaue", value);
         this.setState({
@@ -230,24 +262,13 @@ export default class ReleaseList extends Component {
         console.log("Form submit", record)
         let { editVersion, editstartDate, editEndDate, editDescription, editStatus, editProgress, listDataSrc } = this.state;
 
-        // let arr = this.state.localPRItems;
-        let prObj = {
-            key: record.key,
-            version: editVersion,
-            status: editStatus,
-            progress: editProgress,
-            startDate: editstartDate,
-            endDate: editEndDate,
-            description: editDescription
-        }
-
-        console.log("Presnet Obj", prObj)
         console.log("Presnet Obj list form before", listDataSrc)
 
 
         listDataSrc.map(item => {
             if (item.key == record.key) {
                 item.key = record.key;
+                item.childRelease = item.childRelease;
                 item.version = editVersion != "" ? editVersion : item.version;
                 item.status = editStatus != "" ? editStatus : item.status;
                 item.progress = editProgress != "" ? editProgress : item.progress;
@@ -258,32 +279,26 @@ export default class ReleaseList extends Component {
         })
         console.log("Presnet Obj list form after ", listDataSrc)
         localStorage.setItem('parentReleaseData', JSON.stringify(listDataSrc))
-
-        // form.validateFields((error, row) => {
-        //     if (error) {
-        //         return;
-        //     }
-        //     console.log("Form submit", key)
-        //     console.log("Form submit form", form)
-        //     const newData = [...this.state.data];
-        //     const index = newData.findIndex(item => key === item.key);
-        //     if (index > -1) {
-        //         const item = newData[index];
-        //         newData.splice(index, 1, {
-        //             ...item,
-        //             ...row,
-        //         });
-        //         this.setState({ data: newData, editingKey: '' });
-        //     } else {
-        //         newData.push(row);
-        //         this.setState({ data: newData, editingKey: '' });
-        //     }
-        // });
     }
 
     edit(record) {
         this.setState({ editingKey: record.key });
     }
+
+    handleCancel = () => {
+        this.setState({
+            modalVisible: false
+        })
+    }
+
+    handleOk = () => {
+        this.setState({
+            modalVisible: false
+        })
+    }
+
+
+
 
     render() {
         let { listDataSrc } = this.state;
@@ -311,6 +326,7 @@ export default class ReleaseList extends Component {
         });
 
 
+
         return (
             <>
                 <Form>
@@ -318,15 +334,26 @@ export default class ReleaseList extends Component {
                         columns={columns}
                         dataSource={listDataSrc}
                         components={components}
+                        expandable={{
+                            expandedRowRender: record => <ChildReleaseList record={record} />,
+                        }}
                         rowClassName="editable-row"
                         pagination={{
                             onChange: this.cancel,
                         }}
                     />
                 </Form>
-
-
                 <AddParentRelease />
+                <Modal
+                    title="Basic Modal"
+                    visible={this.state.modalVisible}
+                    onOk={this.handleOk}
+                    closable
+                    className="modal-Layout"
+                    onCancel={this.handleCancel}
+                >
+                    <AddChildRelease thisData={this.state.currentRecord} closeModal={this.handleOk} dbData={listDataSrc} />
+                </Modal>
             </>
         )
     }

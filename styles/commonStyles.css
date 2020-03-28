@@ -1,3 +1,15 @@
 .menuStyle {
     border : 5px solid green;
 }
+
+.ant-modal-content{
+    width: 1000px;
+    top: 10%;
+    position: relative;
+    right: 50%;
+}
+
+.modal-Layout{
+    width: 800px;
+    height: 400px;
+}

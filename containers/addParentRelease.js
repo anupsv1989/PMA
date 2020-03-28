@@ -36,6 +36,7 @@ export default class AddParentRelease extends Component {
 
         console.log("on ifinsh", values);
         console.log("Date", values['startDate'].format('YYYY-MM-DD'));
+
         let arr = this.state.localPRItems;
         let prObj = {
             key: new Date().getTime(),
@@ -44,7 +45,8 @@ export default class AddParentRelease extends Component {
             progress: "",
             startDate: values['startDate'].format(dateFormat),
             endDate: values['endDate'].format(dateFormat),
-            description: values.description
+            description: values.description,
+            childRelease: []
         }
 
         console.log("prObj", prObj);
