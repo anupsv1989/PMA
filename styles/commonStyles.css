@@ -13,3 +13,9 @@
     width: 800px;
     height: 400px;
 }
+
+.action-button-bg{
+    background-color: #75b6eb;
+    margin: 5px;
+    border-radius: 5px;
+}

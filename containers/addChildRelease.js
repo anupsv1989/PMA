@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { Form, Input, Button, Row, Col, DatePicker, Select, Slider } from 'antd';
 
+import { connect } from "react-redux";
+import actions from "../redux/action";
 
+const { onFetchItem } = actions;
 const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
@@ -60,6 +63,7 @@ export default class AddChildRelease extends Component {
 
         console.log("final Array in db", arr)
         localStorage.setItem("parentReleaseData", JSON.stringify(arr))
+        // this.props.onFetchItem();
         this.props.closeModal();
 
     }
@@ -137,3 +141,13 @@ export default class AddChildRelease extends Component {
         )
     }
 }
+
+// const mapStateToProps = state => {
+//     return {
+//         dataFromLS: state.dataFromLS
+//     };
+// };
+
+// export default connect(
+//     mapStateToProps, { onFetchItem }
+// )(AddChildRelease);

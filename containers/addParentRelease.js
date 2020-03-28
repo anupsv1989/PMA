@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Form, Input, Button, Row, Col, DatePicker } from 'antd';
 
+import { connect } from "react-redux";
+import actions from "../redux/action";
+const { onFetchItem } = actions;
 
 const layout = {
     labelCol: { span: 8 },
@@ -12,7 +15,7 @@ const tailLayout = {
 
 const dateFormat = "DD-MM-YYYY";
 
-export default class AddParentRelease extends Component {
+class AddParentRelease extends Component {
 
     constructor(props) {
         super(props);
@@ -37,6 +40,9 @@ export default class AddParentRelease extends Component {
         console.log("on ifinsh", values);
         console.log("Date", values['startDate'].format('YYYY-MM-DD'));
 
+
+
+
         let arr = this.state.localPRItems;
         let prObj = {
             key: new Date().getTime(),
@@ -53,6 +59,7 @@ export default class AddParentRelease extends Component {
         console.log("arr", arr)
         arr.push(prObj);
         localStorage.setItem("parentReleaseData", JSON.stringify(arr))
+        this.props.onFetchItem();
     }
 
 
@@ -63,6 +70,7 @@ export default class AddParentRelease extends Component {
     render() {
         return (
             <div>
+
                 <Form
                     name="basic"
                     initialValues={{ remember: true }}
@@ -114,3 +122,15 @@ export default class AddParentRelease extends Component {
         )
     }
 }
+
+
+const mapStateToProps = state => {
+    console.log("map event")
+    return {
+        dataFromLS: state.dataFromLS
+    };
+};
+
+export default connect(
+    mapStateToProps, { onFetchItem }
+)(AddParentRelease);

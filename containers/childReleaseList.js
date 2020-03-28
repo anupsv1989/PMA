@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import {
-    Table, Popconfirm, Popover, Row, Col, Button, Input, Select, Slider, DatePicker, Form
+    Table, Popconfirm, Popover, Row, Col, Button,
+    Input, Select, Slider, DatePicker, Form, Progress
 } from "antd";
-
+import { connect } from "react-redux";
+import actions from "../redux/action";
 import moment from 'moment';
+import { EllipsisOutlined, EditOutlined } from '@ant-design/icons';
 const dateFormat = "DD-MM-YYYY";
+const { onFetchItem } = actions;
 
-
-export default class ChildReleaseList extends Component {
+class ChildReleaseList extends Component {
 
 
     constructor(props) {
@@ -33,6 +36,15 @@ export default class ChildReleaseList extends Component {
                     dataIndex: 'progress',
                     key: 'progress',
                     editable: true,
+                    render: (rec) => (
+                        <Progress
+                            strokeColor={{
+                                '0%': '#108ee9',
+                                '100%': '#87d068',
+                            }}
+                            percent={rec}
+                        />
+                    ),
                 },
                 {
                     title: 'Start Date',
@@ -59,11 +71,11 @@ export default class ChildReleaseList extends Component {
                         const editable = this.isEditing(record);
                         const Content = (
                             <div>
-                                <Row>
-                                    <Col span={8}><a disabled={this.state.editingKey !== ''} onClick={() => this.edit(record)}>Edit</a></Col>
-                                    <Col span={8}><a disabled={this.state.editingKey !== ''} onClick={() => this.addChildItem(record)}>Add</a></Col>
-                                    <Col span={8}><a disabled={this.state.editingKey !== ''} onClick={() => this.deleteItem(record)}>Delete</a></Col>
-                                </Row>
+                                <EditOutlined disabled={this.state.editingKey !== ''} onClick={() => this.edit(record)} />
+                                {/* <Row>
+                                    <Col span={12}><a disabled={this.state.editingKey !== ''} onClick={() => this.edit(record)}>Edit</a></Col>
+                                    <Col span={12}><a disabled={this.state.editingKey !== ''} onClick={() => this.addChildItem(record)}>Add</a></Col>
+                                </Row> */}
                             </div>
                         );
                         return editable ? (
@@ -82,8 +94,9 @@ export default class ChildReleaseList extends Component {
                                 </Popconfirm>
                             </span>
                         ) : (
-                                <Popover content={Content} title="Title" trigger="hover">
-                                    <Button>Hover me</Button>
+                                <Popover content={Content} title="Actions" trigger="hover">
+
+                                    <EllipsisOutlined style={{ fontSize: "18px" }} />
                                 </Popover>
                             );
                     }
@@ -226,17 +239,24 @@ export default class ChildReleaseList extends Component {
 
         let arr = JSON.parse(localStorage.getItem("parentReleaseData"));
 
-        let index = temp.childRelease.map(x => {
+        let index = arr.map(x => {
             return x.key;
-        }).indexOf(record.key);
+        }).indexOf(temp.key);
         arr.splice(index, 1);
         let addData = temp;
-
         arr.unshift(addData);
 
-
+        // debugger;
         console.log("Presnet Obj list form after ", arr)
-        localStorage.setItem('parentReleaseData', JSON.stringify(arr))
+        localStorage.setItem('parentReleaseData', JSON.stringify(arr));
+        this.setState({
+            editStatus: "",
+            editProgress: "",
+            editstartDate: "",
+            editEndDate: "",
+            editDescription: "",
+        })
+        this.props.onFetchItem();
     }
 
 
@@ -285,3 +305,13 @@ export default class ChildReleaseList extends Component {
     }
 
 }
+
+const mapStateToProps = state => {
+    return {
+        dataFromLS: state.dataFromLS
+    };
+};
+
+export default connect(
+    mapStateToProps, { onFetchItem }
+)(ChildReleaseList);

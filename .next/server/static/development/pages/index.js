@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -212,13 +212,17 @@ const Layout = props => __jsx("div", {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ChildReleaseList; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! moment */ "moment");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _redux_action__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../redux/action */ "./redux/action.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! moment */ "moment");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ant-design/icons */ "@ant-design/icons");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_ant_design_icons__WEBPACK_IMPORTED_MODULE_5__);
 var _jsxFileName = "D:\\RandDChamber\\LogwardAssignment\\ProjectManagement\\PMA\\containers\\ChildReleaseList.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -237,7 +241,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
+
+
 const dateFormat = "DD-MM-YYYY";
+const {
+  onFetchItem
+} = _redux_action__WEBPACK_IMPORTED_MODULE_3__["default"];
+
 class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
@@ -271,7 +282,7 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 117,
+              lineNumber: 130,
               columnNumber: 29
             }
           });
@@ -280,12 +291,12 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         case "startDate":
           inputNode = __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["DatePicker"], {
             name: "startDate",
-            defaultValue: moment__WEBPACK_IMPORTED_MODULE_2___default()(record.startDate, dateFormat),
+            defaultValue: moment__WEBPACK_IMPORTED_MODULE_4___default()(record.startDate, dateFormat),
             onChange: this.handleStartDate,
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 120,
+              lineNumber: 133,
               columnNumber: 29
             }
           });
@@ -294,12 +305,12 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         case "endDate":
           inputNode = __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["DatePicker"], {
             name: "endDate",
-            defaultValue: moment__WEBPACK_IMPORTED_MODULE_2___default()(record.endDate, dateFormat),
+            defaultValue: moment__WEBPACK_IMPORTED_MODULE_4___default()(record.endDate, dateFormat),
             onChange: this.handleEndDate,
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 123,
+              lineNumber: 136,
               columnNumber: 29
             }
           });
@@ -312,7 +323,7 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 126,
+              lineNumber: 139,
               columnNumber: 29
             }
           });
@@ -329,7 +340,7 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 130,
+              lineNumber: 143,
               columnNumber: 21
             }
           }, __jsx(Option, {
@@ -337,7 +348,7 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 131,
+              lineNumber: 144,
               columnNumber: 25
             }
           }, "In Progress"), __jsx(Option, {
@@ -345,7 +356,7 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 132,
+              lineNumber: 145,
               columnNumber: 25
             }
           }, "Unreleased"), __jsx(Option, {
@@ -353,7 +364,7 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 133,
+              lineNumber: 146,
               columnNumber: 25
             }
           }, "Released")); // onChange = { handleChange }
@@ -369,7 +380,7 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 138,
+              lineNumber: 151,
               columnNumber: 29
             }
           });
@@ -381,7 +392,7 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 144,
+          lineNumber: 157,
           columnNumber: 13
         }
       }), editing ? __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
@@ -396,7 +407,7 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 147,
+          lineNumber: 160,
           columnNumber: 25
         }
       }, inputNode) : children); // }
@@ -459,7 +470,20 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         title: 'Progess',
         dataIndex: 'progress',
         key: 'progress',
-        editable: true
+        editable: true,
+        render: rec => __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Progress"], {
+          strokeColor: {
+            '0%': '#108ee9',
+            '100%': '#87d068'
+          },
+          percent: rec,
+          __self: this,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 40,
+            columnNumber: 25
+          }
+        })
       }, {
         title: 'Start Date',
         dataIndex: 'startDate',
@@ -485,74 +509,25 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 61,
+              lineNumber: 73,
               columnNumber: 29
             }
-          }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Row"], {
-            __self: this,
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 62,
-              columnNumber: 33
-            }
-          }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
-            span: 8,
-            __self: this,
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 63,
-              columnNumber: 37
-            }
-          }, __jsx("a", {
+          }, __jsx(_ant_design_icons__WEBPACK_IMPORTED_MODULE_5__["EditOutlined"], {
             disabled: this.state.editingKey !== '',
             onClick: () => this.edit(record),
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 63,
-              columnNumber: 51
+              lineNumber: 74,
+              columnNumber: 33
             }
-          }, "Edit")), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
-            span: 8,
-            __self: this,
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 64,
-              columnNumber: 37
-            }
-          }, __jsx("a", {
-            disabled: this.state.editingKey !== '',
-            onClick: () => this.addChildItem(record),
-            __self: this,
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 64,
-              columnNumber: 51
-            }
-          }, "Add")), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
-            span: 8,
-            __self: this,
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 65,
-              columnNumber: 37
-            }
-          }, __jsx("a", {
-            disabled: this.state.editingKey !== '',
-            onClick: () => this.deleteItem(record),
-            __self: this,
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 65,
-              columnNumber: 51
-            }
-          }, "Delete"))));
+          }));
 
           return editable ? __jsx("span", {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 70,
+              lineNumber: 82,
               columnNumber: 29
             }
           }, __jsx("a", {
@@ -564,7 +539,7 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 71,
+              lineNumber: 83,
               columnNumber: 33
             }
           }, "Save"), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Popconfirm"], {
@@ -573,34 +548,37 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 80,
+              lineNumber: 92,
               columnNumber: 33
             }
           }, __jsx("a", {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 81,
+              lineNumber: 93,
               columnNumber: 37
             }
           }, "Cancel"))) : __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Popover"], {
             content: Content,
-            title: "Title",
+            title: "Actions",
             trigger: "hover",
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 85,
+              lineNumber: 97,
               columnNumber: 33
             }
-          }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+          }, __jsx(_ant_design_icons__WEBPACK_IMPORTED_MODULE_5__["EllipsisOutlined"], {
+            style: {
+              fontSize: "18px"
+            },
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 86,
+              lineNumber: 99,
               columnNumber: 37
             }
-          }, "Hover me"));
+          }));
         }
       }]
     };
@@ -634,14 +612,23 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       }
     });
     let arr = JSON.parse(localStorage.getItem("parentReleaseData"));
-    let index = temp.childRelease.map(x => {
+    let index = arr.map(x => {
       return x.key;
-    }).indexOf(record.key);
+    }).indexOf(temp.key);
     arr.splice(index, 1);
     let addData = temp;
-    arr.unshift(addData);
+    arr.unshift(addData); // debugger;
+
     console.log("Presnet Obj list form after ", arr);
     localStorage.setItem('parentReleaseData', JSON.stringify(arr));
+    this.setState({
+      editStatus: "",
+      editProgress: "",
+      editstartDate: "",
+      editEndDate: "",
+      editDescription: ""
+    });
+    this.props.onFetchItem();
   }
 
   edit(record) {
@@ -679,13 +666,23 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 278,
+        lineNumber: 298,
         columnNumber: 13
       }
     });
   }
 
 }
+
+const mapStateToProps = state => {
+  return {
+    dataFromLS: state.dataFromLS
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, {
+  onFetchItem
+})(ChildReleaseList));
 
 /***/ }),
 
@@ -703,6 +700,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _redux_action__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../redux/action */ "./redux/action.js");
 var _jsxFileName = "D:\\RandDChamber\\LogwardAssignment\\ProjectManagement\\PMA\\containers\\addChildRelease.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -712,6 +712,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
+
+const {
+  onFetchItem
+} = _redux_action__WEBPACK_IMPORTED_MODULE_3__["default"];
 const layout = {
   labelCol: {
     span: 8
@@ -754,7 +759,8 @@ class AddChildRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         }
       });
       console.log("final Array in db", arr);
-      localStorage.setItem("parentReleaseData", JSON.stringify(arr));
+      localStorage.setItem("parentReleaseData", JSON.stringify(arr)); // this.props.onFetchItem();
+
       this.props.closeModal();
     });
 
@@ -783,7 +789,7 @@ class AddChildRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 74,
+        lineNumber: 78,
         columnNumber: 13
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"], {
@@ -796,14 +802,14 @@ class AddChildRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 75,
+        lineNumber: 79,
         columnNumber: 17
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Row"], {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 81,
+        lineNumber: 85,
         columnNumber: 21
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
@@ -811,7 +817,7 @@ class AddChildRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 82,
+        lineNumber: 86,
         columnNumber: 25
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
@@ -820,7 +826,7 @@ class AddChildRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 83,
+        lineNumber: 87,
         columnNumber: 29
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Select"], {
@@ -831,7 +837,7 @@ class AddChildRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 87,
+        lineNumber: 91,
         columnNumber: 33
       }
     }, __jsx(Option, {
@@ -839,7 +845,7 @@ class AddChildRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 88,
+        lineNumber: 92,
         columnNumber: 37
       }
     }, "In Progress"), __jsx(Option, {
@@ -847,7 +853,7 @@ class AddChildRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 89,
+        lineNumber: 93,
         columnNumber: 37
       }
     }, "Unreleased"), __jsx(Option, {
@@ -855,7 +861,7 @@ class AddChildRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 90,
+        lineNumber: 94,
         columnNumber: 37
       }
     }, "Released")))), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
@@ -863,7 +869,7 @@ class AddChildRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 94,
+        lineNumber: 98,
         columnNumber: 25
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
@@ -872,21 +878,21 @@ class AddChildRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 95,
+        lineNumber: 99,
         columnNumber: 29
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["DatePicker"], {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 96,
+        lineNumber: 100,
         columnNumber: 33
       }
     })))), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Row"], {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 100,
+        lineNumber: 104,
         columnNumber: 21
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
@@ -894,7 +900,7 @@ class AddChildRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 101,
+        lineNumber: 105,
         columnNumber: 25
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
@@ -903,14 +909,14 @@ class AddChildRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 102,
+        lineNumber: 106,
         columnNumber: 29
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["DatePicker"], {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 103,
+        lineNumber: 107,
         columnNumber: 33
       }
     }))), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
@@ -918,7 +924,7 @@ class AddChildRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 107,
+        lineNumber: 111,
         columnNumber: 25
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
@@ -927,21 +933,21 @@ class AddChildRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 108,
+        lineNumber: 112,
         columnNumber: 29
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 112,
+        lineNumber: 116,
         columnNumber: 33
       }
     })))), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Row"], {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 117,
+        lineNumber: 121,
         columnNumber: 21
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
@@ -949,7 +955,7 @@ class AddChildRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 118,
+        lineNumber: 122,
         columnNumber: 25
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
@@ -958,7 +964,7 @@ class AddChildRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 119,
+        lineNumber: 123,
         columnNumber: 29
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Slider"], {
@@ -970,7 +976,7 @@ class AddChildRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 120,
+        lineNumber: 124,
         columnNumber: 33
       }
     }))), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
@@ -978,14 +984,14 @@ class AddChildRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 126,
+        lineNumber: 130,
         columnNumber: 25
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, _extends({}, tailLayout, {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 127,
+        lineNumber: 131,
         columnNumber: 29
       }
     }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
@@ -994,13 +1000,20 @@ class AddChildRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 128,
+        lineNumber: 132,
         columnNumber: 33
       }
     }, "Submit"))))));
   }
 
-}
+} // const mapStateToProps = state => {
+//     return {
+//         dataFromLS: state.dataFromLS
+//     };
+// };
+// export default connect(
+//     mapStateToProps, { onFetchItem }
+// )(AddChildRelease);
 
 /***/ }),
 
@@ -1013,11 +1026,13 @@ class AddChildRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AddParentRelease; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _redux_action__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../redux/action */ "./redux/action.js");
 var _jsxFileName = "D:\\RandDChamber\\LogwardAssignment\\ProjectManagement\\PMA\\containers\\addParentRelease.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -1027,6 +1042,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
+
+const {
+  onFetchItem
+} = _redux_action__WEBPACK_IMPORTED_MODULE_3__["default"];
 const layout = {
   labelCol: {
     span: 8
@@ -1042,6 +1062,7 @@ const tailLayout = {
   }
 };
 const dateFormat = "DD-MM-YYYY";
+
 class AddParentRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
@@ -1064,6 +1085,7 @@ class AddParentRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       console.log("arr", arr);
       arr.push(prObj);
       localStorage.setItem("parentReleaseData", JSON.stringify(arr));
+      this.props.onFetchItem();
     });
 
     _defineProperty(this, "onFinishFailed", () => {
@@ -1090,7 +1112,7 @@ class AddParentRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 65,
+        lineNumber: 72,
         columnNumber: 13
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"], {
@@ -1103,14 +1125,14 @@ class AddParentRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 66,
+        lineNumber: 74,
         columnNumber: 17
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Row"], {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 72,
+        lineNumber: 80,
         columnNumber: 21
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
@@ -1118,7 +1140,7 @@ class AddParentRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 73,
+        lineNumber: 81,
         columnNumber: 25
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
@@ -1131,14 +1153,14 @@ class AddParentRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 74,
+        lineNumber: 82,
         columnNumber: 29
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 79,
+        lineNumber: 87,
         columnNumber: 33
       }
     }))), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
@@ -1146,7 +1168,7 @@ class AddParentRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 82,
+        lineNumber: 90,
         columnNumber: 25
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
@@ -1155,14 +1177,14 @@ class AddParentRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 83,
+        lineNumber: 91,
         columnNumber: 29
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["DatePicker"], {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 84,
+        lineNumber: 92,
         columnNumber: 33
       }
     }))), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
@@ -1170,7 +1192,7 @@ class AddParentRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 88,
+        lineNumber: 96,
         columnNumber: 25
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
@@ -1179,14 +1201,14 @@ class AddParentRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 89,
+        lineNumber: 97,
         columnNumber: 29
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["DatePicker"], {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 90,
+        lineNumber: 98,
         columnNumber: 33
       }
     }))), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
@@ -1194,7 +1216,7 @@ class AddParentRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 95,
+        lineNumber: 103,
         columnNumber: 25
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
@@ -1203,14 +1225,14 @@ class AddParentRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 96,
+        lineNumber: 104,
         columnNumber: 29
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 100,
+        lineNumber: 108,
         columnNumber: 33
       }
     }))), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
@@ -1218,14 +1240,14 @@ class AddParentRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 104,
+        lineNumber: 112,
         columnNumber: 25
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, _extends({}, tailLayout, {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 105,
+        lineNumber: 113,
         columnNumber: 29
       }
     }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
@@ -1234,13 +1256,24 @@ class AddParentRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 106,
+        lineNumber: 114,
         columnNumber: 33
       }
     }, "Submit"))))));
   }
 
 }
+
+const mapStateToProps = state => {
+  console.log("map event");
+  return {
+    dataFromLS: state.dataFromLS
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, {
+  onFetchItem
+})(AddParentRelease));
 
 /***/ }),
 
@@ -1253,7 +1286,6 @@ class AddParentRelease extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ReleaseList; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
@@ -1263,6 +1295,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _addChildRelease__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./addChildRelease */ "./containers/addChildRelease.js");
 /* harmony import */ var _ChildReleaseList__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ChildReleaseList */ "./containers/ChildReleaseList.js");
+/* harmony import */ var _redux_action__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../redux/action */ "./redux/action.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ant-design/icons */ "@ant-design/icons");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_ant_design_icons__WEBPACK_IMPORTED_MODULE_8__);
 var _jsxFileName = "D:\\RandDChamber\\LogwardAssignment\\ProjectManagement\\PMA\\containers\\parentReleaseList.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -1284,7 +1321,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
+
+
 const dateFormat = "DD-MM-YYYY";
+const {
+  onFetchItem
+} = _redux_action__WEBPACK_IMPORTED_MODULE_6__["default"];
+
 class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
@@ -1297,7 +1341,17 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       });
     });
 
-    _defineProperty(this, "deleteItem", rec => {});
+    _defineProperty(this, "deleteItem", rec => {
+      let arr = JSON.parse(localStorage.getItem("parentReleaseData"));
+      console.log("Presnet Obj list form before ", arr);
+      let index = arr.map(x => {
+        return x.key;
+      }).indexOf(rec.key);
+      arr.splice(index, 1);
+      console.log("Presnet Obj list form after ", arr);
+      localStorage.setItem('parentReleaseData', JSON.stringify(arr));
+      this.props.onFetchItem();
+    });
 
     _defineProperty(this, "EditableCell", (_ref) => {
       let {
@@ -1326,7 +1380,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 160,
+              lineNumber: 197,
               columnNumber: 29
             }
           });
@@ -1340,7 +1394,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 163,
+              lineNumber: 200,
               columnNumber: 29
             }
           });
@@ -1354,7 +1408,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 166,
+              lineNumber: 203,
               columnNumber: 29
             }
           });
@@ -1367,7 +1421,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 169,
+              lineNumber: 206,
               columnNumber: 29
             }
           });
@@ -1384,7 +1438,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 173,
+              lineNumber: 210,
               columnNumber: 21
             }
           }, __jsx(Option, {
@@ -1392,7 +1446,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 174,
+              lineNumber: 211,
               columnNumber: 25
             }
           }, "In Progress"), __jsx(Option, {
@@ -1400,7 +1454,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 175,
+              lineNumber: 212,
               columnNumber: 25
             }
           }, "Unreleased"), __jsx(Option, {
@@ -1408,7 +1462,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 176,
+              lineNumber: 213,
               columnNumber: 25
             }
           }, "Released")); // onChange = { handleChange }
@@ -1424,7 +1478,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 181,
+              lineNumber: 218,
               columnNumber: 29
             }
           });
@@ -1436,7 +1490,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 188,
+          lineNumber: 225,
           columnNumber: 13
         }
       }), editing ? __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
@@ -1451,7 +1505,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 191,
+          lineNumber: 228,
           columnNumber: 25
         }
       }, inputNode) : children); // }
@@ -1539,7 +1593,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 35,
+            lineNumber: 40,
             columnNumber: 37
           }
         }, text),
@@ -1563,7 +1617,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 50,
+            lineNumber: 55,
             columnNumber: 25
           }
         })
@@ -1592,14 +1646,14 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 83,
+              lineNumber: 88,
               columnNumber: 29
             }
           }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Row"], {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 84,
+              lineNumber: 89,
               columnNumber: 33
             }
           }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
@@ -1607,7 +1661,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 85,
+              lineNumber: 90,
               columnNumber: 37
             }
           }, __jsx("a", {
@@ -1616,7 +1670,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 85,
+              lineNumber: 90,
               columnNumber: 51
             }
           }, "Edit")), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
@@ -1624,7 +1678,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 86,
+              lineNumber: 91,
               columnNumber: 37
             }
           }, __jsx("a", {
@@ -1633,7 +1687,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 86,
+              lineNumber: 91,
               columnNumber: 51
             }
           }, "Add")), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
@@ -1641,7 +1695,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 87,
+              lineNumber: 92,
               columnNumber: 37
             }
           }, __jsx("a", {
@@ -1650,7 +1704,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 87,
+              lineNumber: 92,
               columnNumber: 51
             }
           }, "Delete"))));
@@ -1659,7 +1713,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 92,
+              lineNumber: 97,
               columnNumber: 29
             }
           }, __jsx("a", {
@@ -1671,7 +1725,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 93,
+              lineNumber: 98,
               columnNumber: 33
             }
           }, "Save"), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Popconfirm"], {
@@ -1680,34 +1734,34 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 102,
+              lineNumber: 107,
               columnNumber: 33
             }
           }, __jsx("a", {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 103,
+              lineNumber: 108,
               columnNumber: 37
             }
           }, "Cancel"))) : __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Popover"], {
             content: Content,
-            title: "Title",
+            title: "Actions",
             trigger: "hover",
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 107,
+              lineNumber: 112,
               columnNumber: 33
             }
-          }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+          }, __jsx(_ant_design_icons__WEBPACK_IMPORTED_MODULE_8__["MenuOutlined"], {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 108,
+              lineNumber: 114,
               columnNumber: 37
             }
-          }, "Hover me"));
+          }));
         }
       }],
       listDataSrc: [],
@@ -1716,11 +1770,30 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   }
 
   componentDidMount() {
-    let chkItem = JSON.parse(localStorage.getItem("parentReleaseData"));
-    let getItems = chkItem == null ? [] : chkItem;
-    this.setState({
-      listDataSrc: getItems
-    });
+    // let chkItem = JSON.parse(localStorage.getItem("parentReleaseData"));
+    // let getItems = chkItem == null ? [] : chkItem;
+    // this.setState({
+    //     listDataSrc: getItems
+    // })
+    this.props.onFetchItem();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log("NExgt Props", nextProps);
+    let {
+      dataFromLS
+    } = nextProps;
+    console.log("data from lcoal", dataFromLS);
+
+    if (dataFromLS) {
+      this.setState({
+        listDataSrc: dataFromLS
+      });
+    }
+  }
+
+  shouldComponentUpdate() {
+    return true;
   }
 
   save(record) {
@@ -1749,6 +1822,15 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     });
     console.log("Presnet Obj list form after ", listDataSrc);
     localStorage.setItem('parentReleaseData', JSON.stringify(listDataSrc));
+    this.setState({
+      editStatus: "",
+      editProgress: "",
+      editstartDate: "",
+      editVersion: "",
+      editEndDate: "",
+      editDescription: ""
+    });
+    this.props.onFetchItem();
   }
 
   edit(record) {
@@ -1758,6 +1840,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   }
 
   render() {
+    console.log("data back from redux ++++ ", this.props.dataFromLS);
     let {
       listDataSrc
     } = this.state;
@@ -1785,7 +1868,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 329,
+        lineNumber: 379,
         columnNumber: 17
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Table"], {
@@ -1798,7 +1881,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 335,
+            lineNumber: 385,
             columnNumber: 58
           }
         })
@@ -1810,17 +1893,17 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 330,
+        lineNumber: 380,
         columnNumber: 21
       }
-    })), __jsx(_addParentRelease__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    })), __jsx(_addParentRelease__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({}, this.props, {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 343,
+        lineNumber: 393,
         columnNumber: 17
       }
-    }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Modal"], {
+    })), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Modal"], {
       title: "Basic Modal",
       visible: this.state.modalVisible,
       onOk: this.handleOk,
@@ -1830,7 +1913,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 344,
+        lineNumber: 394,
         columnNumber: 17
       }
     }, __jsx(_addChildRelease__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -1840,13 +1923,23 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 352,
+        lineNumber: 402,
         columnNumber: 21
       }
     })));
   }
 
 }
+
+const mapStateToProps = state => {
+  return {
+    dataFromLS: state.dataFromLS
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_7__["connect"])(mapStateToProps, {
+  onFetchItem
+})(ReleaseList));
 
 /***/ }),
 
@@ -3534,59 +3627,61 @@ module.exports = __webpack_require__(/*! ./dist/client/link */ "./node_modules/n
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Blog; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Header */ "./components/Header.js");
-/* harmony import */ var _components_MyLayout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/MyLayout */ "./components/MyLayout.js");
-/* harmony import */ var _containers_parentReleaseList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../containers/parentReleaseList */ "./containers/parentReleaseList.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Page; });
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Header */ "./components/Header.js");
+/* harmony import */ var _components_MyLayout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/MyLayout */ "./components/MyLayout.js");
+/* harmony import */ var _containers_parentReleaseList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../containers/parentReleaseList */ "./containers/parentReleaseList.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-dom */ "react-dom");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _redux_reducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../redux/reducer */ "./redux/reducer.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var redux_saga__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! redux-saga */ "redux-saga");
+/* harmony import */ var redux_saga__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(redux_saga__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _redux_saga__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../redux/saga */ "./redux/saga.js");
 var _jsxFileName = "D:\\RandDChamber\\LogwardAssignment\\ProjectManagement\\PMA\\pages\\index.js";
-
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
+var __jsx = react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement;
 
 
 
 
-const PostLink = props => __jsx("li", {
-  __self: undefined,
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 8,
-    columnNumber: 5
-  }
-}, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-  href: `/posts?title=${props.title}`,
-  __self: undefined,
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 9,
-    columnNumber: 9
-  }
-}, __jsx("a", {
-  __self: undefined,
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 10,
-    columnNumber: 13
-  }
-}, props.title)));
 
-function Blog() {
-  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 19,
-      columnNumber: 13
-    }
-  }), __jsx(_containers_parentReleaseList__WEBPACK_IMPORTED_MODULE_4__["default"], {
+
+
+
+
+
+
+const sagaMiddleware = redux_saga__WEBPACK_IMPORTED_MODULE_9___default()();
+const store = Object(redux__WEBPACK_IMPORTED_MODULE_8__["createStore"])(_redux_reducer__WEBPACK_IMPORTED_MODULE_6__["default"], Object(redux__WEBPACK_IMPORTED_MODULE_8__["applyMiddleware"])(sagaMiddleware));
+sagaMiddleware.run(_redux_saga__WEBPACK_IMPORTED_MODULE_10__["default"]);
+function Page() {
+  return __jsx(react_redux__WEBPACK_IMPORTED_MODULE_7__["Provider"], {
+    store: store,
     __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 20,
+      columnNumber: 9
+    }
+  }, __jsx(_components_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 21,
+      columnNumber: 13
+    }
+  }), __jsx(_containers_parentReleaseList__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 22,
       columnNumber: 13
     }
   }));
@@ -3594,7 +3689,150 @@ function Blog() {
 
 /***/ }),
 
-/***/ 3:
+/***/ "./redux/action.js":
+/*!*************************!*\
+  !*** ./redux/action.js ***!
+  \*************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// const actions = {
+//     DELETE_ITEM: "DELETE_ITEM",
+//     DELETE_ITEM_SUCCESS: "DELETE_ITEM_SUCCESS",
+//     onDeleteItem: () => ({
+//         type: actions.DELETE_ITEM,
+//         value: 1
+//     })
+// }
+// export default actions;
+const actions = {
+  FETCH_ITEM: "FETCH_ITEM",
+  FETCH_ITEM_SUCCESS: "FETCH_ITEM_SUCCESS",
+  onFetchItem: () => ({
+    type: actions.FETCH_ITEM,
+    value: 1
+  }),
+  onFetchItemSuccess: result => ({
+    type: actions.FETCH_ITEM_SUCCESS,
+    result
+  })
+};
+/* harmony default export */ __webpack_exports__["default"] = (actions);
+
+/***/ }),
+
+/***/ "./redux/reducer.js":
+/*!**************************!*\
+  !*** ./redux/reducer.js ***!
+  \**************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+// const initialState = {
+//     age: 20
+// };
+// const reducer = (state = initialState, action) => {
+//     const newState = { ...state };
+//     switch (action.type) {
+//         case "DELETE_ITEM_SUCCESS":
+//             console.log("Inside reducer")
+//             newState.age += action.value;
+//             break;
+//         case "AGE_DOWN":
+//             newState.age -= action.value;
+//             break;
+//     }
+//     return newState;
+// };
+// export default reducer;
+const initialState = {
+  dataFromLS: [],
+  value: 20
+};
+
+const reducer = (state = initialState, action) => {
+  const newState = _objectSpread({}, state);
+
+  switch (action.type) {
+    case "FETCH_ITEM_SUCCESS":
+      console.log("Inside reducer", action.result);
+      newState.dataFromLS = action.result && JSON.parse(action.result).length > 0 ? JSON.parse(action.result) : [];
+      break;
+
+    case "AGE_DOWN":
+      newState.age -= action.value;
+      break;
+  }
+
+  return newState;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (reducer);
+
+/***/ }),
+
+/***/ "./redux/saga.js":
+/*!***********************!*\
+  !*** ./redux/saga.js ***!
+  \***********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return rootSaga; });
+/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-saga/effects */ "redux-saga/effects");
+/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__);
+// import { delay } from "redux-saga";
+
+
+function* fetchUser(action) {
+  try {
+    // const user = yield call(Api.fetchUser, action.payload.userId);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: "USER_FETCH_SUCCEEDED",
+      user: user
+    });
+  } catch (e) {
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: "USER_FETCH_FAILED",
+      message: e.message
+    });
+  }
+}
+
+function* onFetchItem() {
+  // yield delay(4000);
+  console.log("Inside sAga"); // yield put({ type: "DELETE_ITEM_SUCCESS", value: 1 });
+
+  let res = localStorage.getItem("parentReleaseData");
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+    type: "FETCH_ITEM_SUCCESS",
+    result: res
+  });
+} // export function* watchAgeUp() {
+//     yield takeLatest("AGE_UP", ageUpAsync);
+// }
+
+
+function* rootSaga() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeEvery"])("USER_FETCH_REQUESTED", fetchUser);
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeEvery"])("FETCH_ITEM", onFetchItem);
+}
+
+/***/ }),
+
+/***/ 4:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/
@@ -3603,6 +3841,17 @@ function Blog() {
 
 module.exports = __webpack_require__(/*! D:\RandDChamber\LogwardAssignment\ProjectManagement\PMA\pages\index.js */"./pages/index.js");
 
+
+/***/ }),
+
+/***/ "@ant-design/icons":
+/*!************************************!*\
+  !*** external "@ant-design/icons" ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@ant-design/icons");
 
 /***/ }),
 
@@ -3661,6 +3910,17 @@ module.exports = require("react");
 
 /***/ }),
 
+/***/ "react-dom":
+/*!****************************!*\
+  !*** external "react-dom" ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-dom");
+
+/***/ }),
+
 /***/ "react-is":
 /*!***************************!*\
   !*** external "react-is" ***!
@@ -3669,6 +3929,50 @@ module.exports = require("react");
 /***/ (function(module, exports) {
 
 module.exports = require("react-is");
+
+/***/ }),
+
+/***/ "react-redux":
+/*!******************************!*\
+  !*** external "react-redux" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-redux");
+
+/***/ }),
+
+/***/ "redux":
+/*!************************!*\
+  !*** external "redux" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("redux");
+
+/***/ }),
+
+/***/ "redux-saga":
+/*!*****************************!*\
+  !*** external "redux-saga" ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("redux-saga");
+
+/***/ }),
+
+/***/ "redux-saga/effects":
+/*!*************************************!*\
+  !*** external "redux-saga/effects" ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("redux-saga/effects");
 
 /***/ }),
 

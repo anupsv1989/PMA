@@ -7,12 +7,17 @@ import AddParentRelease from './addParentRelease';
 import moment from 'moment';
 import AddChildRelease from "./addChildRelease";
 import ChildReleaseList from "./ChildReleaseList";
+import actions from "../redux/action";
+import { connect } from "react-redux";
+import { MenuOutlined } from '@ant-design/icons';
+
+
 
 const dateFormat = "DD-MM-YYYY";
 
+const { onFetchItem } = actions;
 
-
-export default class ReleaseList extends Component {
+class ReleaseList extends Component {
 
     constructor(props) {
         super(props);
@@ -104,8 +109,9 @@ export default class ReleaseList extends Component {
                                 </Popconfirm>
                             </span>
                         ) : (
-                                <Popover content={Content} title="Title" trigger="hover">
-                                    <Button>Hover me</Button>
+                                <Popover content={Content} title="Actions" trigger="hover">
+                                    {/* <Button>Hover me</Button> */}
+                                    <MenuOutlined />
                                 </Popover>
                             );
                     }
@@ -128,15 +134,46 @@ export default class ReleaseList extends Component {
 
     deleteItem = (rec) => {
 
+        let arr = JSON.parse(localStorage.getItem("parentReleaseData"));
+
+        console.log("Presnet Obj list form before ", arr)
+        let index = arr.map(x => {
+            return x.key;
+        }).indexOf(rec.key);
+        arr.splice(index, 1);
+
+
+        console.log("Presnet Obj list form after ", arr)
+        localStorage.setItem('parentReleaseData', JSON.stringify(arr));
+        this.props.onFetchItem();
+
     }
 
     componentDidMount() {
-        let chkItem = JSON.parse(localStorage.getItem("parentReleaseData"));
-        let getItems = chkItem == null ? [] : chkItem;
-        this.setState({
-            listDataSrc: getItems
-        })
+        // let chkItem = JSON.parse(localStorage.getItem("parentReleaseData"));
+        // let getItems = chkItem == null ? [] : chkItem;
+        // this.setState({
+        //     listDataSrc: getItems
+        // })
+        this.props.onFetchItem();
     }
+
+    componentWillReceiveProps(nextProps) {
+        console.log("NExgt Props", nextProps);
+        let { dataFromLS } = nextProps
+        console.log("data from lcoal", dataFromLS);
+
+        if (dataFromLS) {
+            this.setState({
+                listDataSrc: dataFromLS
+            })
+        }
+    }
+
+    shouldComponentUpdate() {
+        return true;
+    }
+
 
     EditableCell = ({
         editing,
@@ -275,7 +312,17 @@ export default class ReleaseList extends Component {
             }
         })
         console.log("Presnet Obj list form after ", listDataSrc)
-        localStorage.setItem('parentReleaseData', JSON.stringify(listDataSrc))
+        localStorage.setItem('parentReleaseData', JSON.stringify(listDataSrc));
+        this.setState({
+            editStatus: "",
+            editProgress: "",
+            editstartDate: "",
+            editVersion: "",
+            editEndDate: "",
+            editDescription: "",
+        })
+        this.props.onFetchItem();
+
     }
 
     edit(record) {
@@ -298,6 +345,9 @@ export default class ReleaseList extends Component {
 
 
     render() {
+
+        console.log("data back from redux ++++ ", this.props.dataFromLS)
+
         let { listDataSrc } = this.state;
 
         const components = {
@@ -340,7 +390,7 @@ export default class ReleaseList extends Component {
                         }}
                     />
                 </Form>
-                <AddParentRelease />
+                <AddParentRelease {...this.props} />
                 <Modal
                     title="Basic Modal"
                     visible={this.state.modalVisible}
@@ -351,9 +401,20 @@ export default class ReleaseList extends Component {
                 >
                     <AddChildRelease thisData={this.state.currentRecord} closeModal={this.handleOk} dbData={listDataSrc} />
                 </Modal>
+
             </>
         )
     }
 
-
 }
+
+const mapStateToProps = state => {
+    return {
+        dataFromLS: state.dataFromLS
+    };
+};
+
+
+export default connect(
+    mapStateToProps, { onFetchItem }
+)(ReleaseList);
