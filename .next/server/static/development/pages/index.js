@@ -271,7 +271,7 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 112,
+              lineNumber: 117,
               columnNumber: 29
             }
           });
@@ -285,7 +285,7 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 115,
+              lineNumber: 120,
               columnNumber: 29
             }
           });
@@ -299,7 +299,7 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 118,
+              lineNumber: 123,
               columnNumber: 29
             }
           });
@@ -312,7 +312,7 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 121,
+              lineNumber: 126,
               columnNumber: 29
             }
           });
@@ -325,10 +325,11 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             },
             name: "status",
             onChange: this.handleChange,
+            defaultValue: record.status,
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 125,
+              lineNumber: 130,
               columnNumber: 21
             }
           }, __jsx(Option, {
@@ -336,7 +337,7 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 126,
+              lineNumber: 131,
               columnNumber: 25
             }
           }, "In Progress"), __jsx(Option, {
@@ -344,7 +345,7 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 127,
+              lineNumber: 132,
               columnNumber: 25
             }
           }, "Unreleased"), __jsx(Option, {
@@ -352,7 +353,7 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 128,
+              lineNumber: 133,
               columnNumber: 25
             }
           }, "Released")); // onChange = { handleChange }
@@ -368,14 +369,11 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 133,
+              lineNumber: 138,
               columnNumber: 29
             }
           });
           break;
-
-        default: // code block
-
       } // const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
 
 
@@ -383,7 +381,7 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 141,
+          lineNumber: 144,
           columnNumber: 13
         }
       }), editing ? __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
@@ -398,10 +396,45 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 144,
+          lineNumber: 147,
           columnNumber: 25
         }
       }, inputNode) : children); // }
+    });
+
+    _defineProperty(this, "handleChange", value => {
+      console.log("Vlaue", value);
+      this.setState({
+        editStatus: value
+      });
+    });
+
+    _defineProperty(this, "handleSlider", value => {
+      console.log("slider Vlaue", value);
+      this.setState({
+        editProgress: value
+      });
+    });
+
+    _defineProperty(this, "handleStartDate", (date, str) => {
+      console.log("sliceer sd str", str);
+      this.setState({
+        editstartDate: str
+      });
+    });
+
+    _defineProperty(this, "handleEndDate", (date, str) => {
+      console.log("sliceer ed", str);
+      this.setState({
+        editEndDate: str
+      });
+    });
+
+    _defineProperty(this, "handleDescription", e => {
+      console.log("sliceer desc", e.target.value);
+      this.setState({
+        editDescription: e.target.value
+      });
     });
 
     _defineProperty(this, "cancel", () => {
@@ -412,6 +445,11 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
     this.state = {
       editingKey: '',
+      editStatus: "",
+      editProgress: "",
+      editstartDate: "",
+      editEndDate: "",
+      editDescription: "",
       childColumns: [{
         title: 'Status',
         dataIndex: 'status',
@@ -447,14 +485,14 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 56,
+              lineNumber: 61,
               columnNumber: 29
             }
           }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Row"], {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 57,
+              lineNumber: 62,
               columnNumber: 33
             }
           }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
@@ -462,7 +500,7 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 58,
+              lineNumber: 63,
               columnNumber: 37
             }
           }, __jsx("a", {
@@ -471,7 +509,7 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 58,
+              lineNumber: 63,
               columnNumber: 51
             }
           }, "Edit")), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
@@ -479,7 +517,7 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 59,
+              lineNumber: 64,
               columnNumber: 37
             }
           }, __jsx("a", {
@@ -488,7 +526,7 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 59,
+              lineNumber: 64,
               columnNumber: 51
             }
           }, "Add")), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
@@ -496,7 +534,7 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 60,
+              lineNumber: 65,
               columnNumber: 37
             }
           }, __jsx("a", {
@@ -505,7 +543,7 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 60,
+              lineNumber: 65,
               columnNumber: 51
             }
           }, "Delete"))));
@@ -514,7 +552,7 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 65,
+              lineNumber: 70,
               columnNumber: 29
             }
           }, __jsx("a", {
@@ -526,7 +564,7 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 66,
+              lineNumber: 71,
               columnNumber: 33
             }
           }, "Save"), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Popconfirm"], {
@@ -535,14 +573,14 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 75,
+              lineNumber: 80,
               columnNumber: 33
             }
           }, __jsx("a", {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 76,
+              lineNumber: 81,
               columnNumber: 37
             }
           }, "Cancel"))) : __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Popover"], {
@@ -552,20 +590,58 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 80,
+              lineNumber: 85,
               columnNumber: 33
             }
           }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 81,
+              lineNumber: 86,
               columnNumber: 37
             }
           }, "Hover me"));
         }
       }]
     };
+  }
+
+  save(record) {
+    console.log("Form submit", record);
+    console.log("Form submit this data", this.props.thisData);
+    let {
+      editstartDate,
+      editEndDate,
+      editDescription,
+      editStatus,
+      editProgress
+    } = this.state;
+    console.log("editstartDate ", editstartDate);
+    console.log("editEndDate ", editEndDate);
+    console.log("editDescription ", editDescription);
+    console.log("editStatus ", editStatus);
+    console.log("editProgress ", editProgress);
+    console.log("Presnet Obj list form before");
+    let temp = this.props.thisData;
+    temp.childRelease.map(item => {
+      if (item.key == record.key) {
+        item.key = record.key;
+        item.status = editStatus != "" ? editStatus : item.status;
+        item.progress = editProgress != "" ? editProgress : item.progress;
+        item.startDate = editstartDate != "" ? editstartDate : item.startDate;
+        item.endDate = editEndDate != "" ? editEndDate : item.endDate;
+        item.description = editDescription != "" ? editDescription : item.description;
+      }
+    });
+    let arr = JSON.parse(localStorage.getItem("parentReleaseData"));
+    let index = temp.childRelease.map(x => {
+      return x.key;
+    }).indexOf(record.key);
+    arr.splice(index, 1);
+    let addData = temp;
+    arr.unshift(addData);
+    console.log("Presnet Obj list form after ", arr);
+    localStorage.setItem('parentReleaseData', JSON.stringify(arr));
   }
 
   edit(record) {
@@ -597,13 +673,13 @@ class ChildReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     });
     return __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Table"], {
       columns: columns,
-      dataSource: this.props.record.childRelease,
+      dataSource: this.props.thisData.childRelease,
       pagination: false,
       components: components,
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 202,
+        lineNumber: 278,
         columnNumber: 13
       }
     });
@@ -1303,6 +1379,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
               width: 120
             },
             name: "status",
+            defaultValue: record.status,
             onChange: this.handleChange,
             __self: this,
             __source: {
@@ -1352,9 +1429,6 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
             }
           });
           break;
-
-        default: // code block
-
       } // const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
 
 
@@ -1362,7 +1436,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 189,
+          lineNumber: 188,
           columnNumber: 13
         }
       }), editing ? __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
@@ -1377,7 +1451,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 192,
+          lineNumber: 191,
           columnNumber: 25
         }
       }, inputNode) : children); // }
@@ -1711,7 +1785,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 332,
+        lineNumber: 329,
         columnNumber: 17
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Table"], {
@@ -1720,11 +1794,11 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       components: components,
       expandable: {
         expandedRowRender: record => __jsx(_ChildReleaseList__WEBPACK_IMPORTED_MODULE_5__["default"], {
-          record: record,
+          thisData: record,
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 338,
+            lineNumber: 335,
             columnNumber: 58
           }
         })
@@ -1736,14 +1810,14 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 333,
+        lineNumber: 330,
         columnNumber: 21
       }
     })), __jsx(_addParentRelease__WEBPACK_IMPORTED_MODULE_2__["default"], {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 346,
+        lineNumber: 343,
         columnNumber: 17
       }
     }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Modal"], {
@@ -1756,7 +1830,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 347,
+        lineNumber: 344,
         columnNumber: 17
       }
     }, __jsx(_addChildRelease__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -1766,7 +1840,7 @@ class ReleaseList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 355,
+        lineNumber: 352,
         columnNumber: 21
       }
     })));

@@ -170,7 +170,7 @@ export default class ReleaseList extends Component {
                 break;
             case "status":
                 inputNode =
-                    <Select style={{ width: 120 }} name="status" onChange={this.handleChange}>
+                    <Select style={{ width: 120 }} name="status" defaultValue={record.status} onChange={this.handleChange}>
                         <Option value="IN PROGRESS">In Progress</Option>
                         <Option value="UNRELEASED">Unreleased</Option>
                         <Option value="RELEASED">Released</Option>
@@ -180,8 +180,7 @@ export default class ReleaseList extends Component {
             case "progress":
                 inputNode = <Slider defaultValue={30} tooltipVisible name="progress" onChange={this.handleSlider} />
                 break;
-            default:
-            // code block
+
         }
 
         // const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
@@ -218,8 +217,6 @@ export default class ReleaseList extends Component {
             editStatus: value
         })
     }
-
-
 
     handleSlider = (value) => {
         console.log("slider Vlaue", value);
@@ -335,7 +332,7 @@ export default class ReleaseList extends Component {
                         dataSource={listDataSrc}
                         components={components}
                         expandable={{
-                            expandedRowRender: record => <ChildReleaseList record={record} />,
+                            expandedRowRender: record => <ChildReleaseList thisData={record} />,
                         }}
                         rowClassName="editable-row"
                         pagination={{
