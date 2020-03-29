@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Form, Input, Button, Row, Col, DatePicker } from 'antd';
-
+import { dateFormat } from "../commons/helpers"
 import { connect } from "react-redux";
 import actions from "../redux/action";
+import moment from 'moment';
 const { onFetchItem } = actions;
 
 const layout = {
@@ -13,7 +14,6 @@ const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
 };
 
-const dateFormat = "DD-MM-YYYY";
 
 class AddParentRelease extends Component {
 
@@ -38,7 +38,7 @@ class AddParentRelease extends Component {
     onFinish = (values) => {
 
         console.log("on ifinsh", values);
-        console.log("Date", values['startDate'].format('YYYY-MM-DD'));
+        console.log("Date", values['startDate']);
 
 
 
@@ -49,8 +49,8 @@ class AddParentRelease extends Component {
             version: values.version,
             status: "",
             progress: "",
-            startDate: values['startDate'].format(dateFormat),
-            endDate: values['endDate'].format(dateFormat),
+            startDate: values['startDate'] ? values['startDate'].format(dateFormat) : '',
+            endDate: values['endDate'] ? values['endDate'].format(dateFormat) : '',
             description: values.description,
             childRelease: []
         }
@@ -77,46 +77,48 @@ class AddParentRelease extends Component {
                     onFinish={this.onFinish}
                     onFinishFailed={this.onFinishFailed}
                 >
-                    <Row>
-                        <Col span={4}>
-                            <Form.Item
-                                label="version"
-                                name="version"
-                                rules={[{ required: true, message: 'Please input your version!' }]}
-                            >
-                                <Input />
-                            </Form.Item>
-                        </Col>
-                        <Col span={4}>
-                            <Form.Item label="start Date" name="startDate"  >
-                                <DatePicker />
-                            </Form.Item>
+                    <div className="parent-release-sec">
+                        <Row>
+                            <Col span={5} className="parent-release-sec-col">
+                                <Form.Item
+                                    label="Version"
+                                    name="version"
+                                    rules={[{ required: true, message: 'Please input your version!' }]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                            </Col>
+                            <Col span={4} className="parent-release-sec-col">
+                                <Form.Item label="Start Date" name="startDate"  >
+                                    <DatePicker defaultValue={moment(new Date, dateFormat)} />
+                                </Form.Item>
 
-                        </Col>
-                        <Col span={4}>
-                            <Form.Item label="end Date" name="endDate">
-                                <DatePicker />
-                            </Form.Item>
+                            </Col>
+                            <Col span={4} className="parent-release-sec-col">
+                                <Form.Item label="Release Date" name="endDate">
+                                    <DatePicker defaultValue={moment(new Date, dateFormat)} />
+                                </Form.Item>
 
-                        </Col>
+                            </Col>
 
-                        <Col span={4}>
-                            <Form.Item
-                                label="Description"
-                                name="description"
-                            >
-                                <Input />
-                            </Form.Item>
+                            <Col span={5} className="parent-release-sec-col">
+                                <Form.Item
+                                    label="Description"
+                                    name="description"
+                                >
+                                    <Input />
+                                </Form.Item>
 
-                        </Col>
-                        <Col span={4}>
-                            <Form.Item {...tailLayout}>
-                                <Button type="primary" htmlType="submit">
-                                    Submit
+                            </Col>
+                            <Col span={4} className="parent-release-sec-col">
+                                <Form.Item {...tailLayout}>
+                                    <Button type="primary" htmlType="submit">
+                                        Submit
                             </Button>
-                            </Form.Item>
-                        </Col>
-                    </Row>
+                                </Form.Item>
+                            </Col>
+                        </Row>
+                    </div>
                 </Form>
             </div>
         )

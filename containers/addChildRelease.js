@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Form, Input, Button, Row, Col, DatePicker, Select, Slider } from 'antd';
-
+import { dateFormat } from "../commons/helpers";
 import { connect } from "react-redux";
 import actions from "../redux/action";
+import moment from 'moment';
 
 const { onFetchItem } = actions;
 const layout = {
@@ -13,7 +14,6 @@ const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
 };
 
-const dateFormat = "DD-MM-YYYY";
 
 export default class AddChildRelease extends Component {
 
@@ -52,8 +52,8 @@ export default class AddChildRelease extends Component {
                 let temp = {
                     key: "cr" + new Date().getTime(),
                     status: values.status,
-                    startDate: values['startDate'].format(dateFormat),
-                    endDate: values['endDate'].format(dateFormat),
+                    startDate: values['startDate'] ? values['startDate'].format(dateFormat) : "",
+                    endDate: values['endDate'] ? values['endDate'].format(dateFormat) : "",
                     description: values.description,
                     progress: values.progress
                 }
@@ -83,32 +83,42 @@ export default class AddChildRelease extends Component {
                     onFinishFailed={this.onFinishFailed}
                 >
                     <Row>
-                        <Col span={12}>
+                        <Col span={8} className="left-addCol">
                             <Form.Item
-                                label="status"
+                                label="Status"
                                 name="status"
                             >
-                                <Select style={{ width: 120 }} name="status" >
+                                <Select name="status" >
                                     <Option value="IN PROGRESS">In Progress</Option>
                                     <Option value="UNRELEASED">Unreleased</Option>
                                     <Option value="RELEASED">Released</Option>
                                 </Select>
                             </Form.Item>
                         </Col>
-                        <Col span={12}>
+                        <Col span={6}>
                             <Form.Item label="Start Date" name="startDate">
-                                <DatePicker />
+                                <DatePicker defaultValue={moment(new Date, dateFormat)} />
+                            </Form.Item>
+                        </Col>
+                        <Col span={6} className="enddate-align">
+                            <Form.Item label="End Date" name="endDate">
+                                <DatePicker defaultValue={moment(new Date, dateFormat)} />
                             </Form.Item>
                         </Col>
                     </Row>
                     <Row>
-                        <Col span={12}>
-                            <Form.Item label="End Date" name="endDate">
-                                <DatePicker />
+                        <Col span={8} className="left-addCol">
+                            <Form.Item label="Progress" name="progress"  >
+                                <Slider
+                                    defaultValue={0}
+                                    tooltipPlacement="bottom"
+                                    name="progress"
+                                    onChange={this.handleSlider} />
                             </Form.Item>
+
                         </Col>
 
-                        <Col span={12}>
+                        <Col span={14} >
                             <Form.Item
                                 label="Description"
                                 name="description"
@@ -119,15 +129,7 @@ export default class AddChildRelease extends Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col span={12}>
-                            <Form.Item label="Progress" name="progress"  >
-                                <Slider defaultValue={30} tooltipVisible
-                                    tooltipPlacement="bottom"
-                                    name="progress" onChange={this.handleSlider} />
-                            </Form.Item>
-
-                        </Col>
-                        <Col span={12}>
+                        <Col span={24} className="btn-add-child">
                             <Form.Item {...tailLayout}>
                                 <Button type="primary" htmlType="submit">
                                     Submit
@@ -142,12 +144,3 @@ export default class AddChildRelease extends Component {
     }
 }
 
-// const mapStateToProps = state => {
-//     return {
-//         dataFromLS: state.dataFromLS
-//     };
-// };
-
-// export default connect(
-//     mapStateToProps, { onFetchItem }
-// )(AddChildRelease);

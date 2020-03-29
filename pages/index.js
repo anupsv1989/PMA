@@ -15,11 +15,19 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducer, applyMiddleware(sagaMiddleware));
 
 sagaMiddleware.run(rootSaga);
+const layoutStyle = {
+    margin: 20,
+    padding: 20,
+    border: '1px solid red'
+}
+
 export default function Page() {
     return (
         <Provider store={store}>
             <Header />
-            <ReleaseList />
+            <Layout >
+                <ReleaseList />
+            </Layout>
         </Provider>
     )
 }

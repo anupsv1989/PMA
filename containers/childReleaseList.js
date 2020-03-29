@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import {
-    Table, Popconfirm, Popover, Row, Col, Button,
+    Table, Popconfirm, Popover, Row, Col, Button, Tag,
     Input, Select, Slider, DatePicker, Form, Progress
 } from "antd";
 import { connect } from "react-redux";
 import actions from "../redux/action";
 import moment from 'moment';
 import { EllipsisOutlined, EditOutlined } from '@ant-design/icons';
-const dateFormat = "DD-MM-YYYY";
+import { statusDisplay, progressDisplay, dateFormat } from "../commons/helpers";
 const { onFetchItem } = actions;
 
 class ChildReleaseList extends Component {
@@ -16,9 +16,8 @@ class ChildReleaseList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            editStatus: "IN PROGRESS",
             editingKey: '',
-            editStatus: "",
             editProgress: "",
             editstartDate: "",
             editEndDate: "",
@@ -30,21 +29,14 @@ class ChildReleaseList extends Component {
                     dataIndex: 'status',
                     key: 'status',
                     editable: true,
+                    render: (rec) => statusDisplay(rec)
                 },
                 {
                     title: 'Progess',
                     dataIndex: 'progress',
                     key: 'progress',
                     editable: true,
-                    render: (rec) => (
-                        <Progress
-                            strokeColor={{
-                                '0%': '#108ee9',
-                                '100%': '#87d068',
-                            }}
-                            percent={rec}
-                        />
-                    ),
+                    render: (rec) => progressDisplay(rec)
                 },
                 {
                     title: 'Start Date',
@@ -69,15 +61,7 @@ class ChildReleaseList extends Component {
                     key: 'action',
                     render: (text, record) => {
                         const editable = this.isEditing(record);
-                        const Content = (
-                            <div>
-                                <EditOutlined disabled={this.state.editingKey !== ''} onClick={() => this.edit(record)} />
-                                {/* <Row>
-                                    <Col span={12}><a disabled={this.state.editingKey !== ''} onClick={() => this.edit(record)}>Edit</a></Col>
-                                    <Col span={12}><a disabled={this.state.editingKey !== ''} onClick={() => this.addChildItem(record)}>Add</a></Col>
-                                </Row> */}
-                            </div>
-                        );
+
                         return editable ? (
                             <span>
                                 <a
@@ -89,21 +73,19 @@ class ChildReleaseList extends Component {
                                 >
                                     Save
                             </a>
-                                <Popconfirm title="Sure to cancel?" onConfirm={this.cancel}>
+                                <Popconfirm title="Sure to cancel?" onConfirm={this.cancel} >
                                     <a>Cancel</a>
                                 </Popconfirm>
                             </span>
                         ) : (
-                                <Popover content={Content} title="Actions" trigger="hover">
-
-                                    <EllipsisOutlined style={{ fontSize: "18px" }} />
-                                </Popover>
+                                <EditOutlined disabled={this.state.editingKey !== ''} onClick={() => this.edit(record)} />
                             );
                     }
                 }
             ],
         }
     }
+
 
 
     isEditing = record => record.key === this.state.editingKey;
@@ -125,6 +107,7 @@ class ChildReleaseList extends Component {
         let inputNode;
 
 
+
         switch (dataIndex) {
             case "version":
                 inputNode = <Input defaultValue={record.version} name="version" onChange={this.handleVersion} />
@@ -139,16 +122,12 @@ class ChildReleaseList extends Component {
                 inputNode = <Input defaultValue={record.description} onChange={this.handleDescription} />
                 break;
             case "status":
-                inputNode =
-                    <Select style={{ width: 120 }} name="status" onChange={this.handleChange} defaultValue={record.status}>
-                        <Option value="IN PROGRESS">In Progress</Option>
-                        <Option value="UNRELEASED">Unreleased</Option>
-                        <Option value="RELEASED">Released</Option>
-                    </Select>
-                // onChange = { handleChange }
+                inputNode = statusDisplay(this.state.editStatus)
+                // inputNode = this.fetchStatusDisp(record.status);
+
                 break;
             case "progress":
-                inputNode = <Slider defaultValue={30} tooltipVisible name="progress" onChange={this.handleSlider} />
+                inputNode = <Slider defaultValue={record.progress ? record.progress : 0} tooltipVisible name="progress" onChange={this.handleSlider} />
                 break;
         }
 
@@ -180,6 +159,11 @@ class ChildReleaseList extends Component {
         // }
     };
 
+    fetchStatusDisp = (rec) => {
+
+
+    }
+
     handleChange = (value) => {
         console.log("Vlaue", value)
         this.setState({
@@ -188,9 +172,18 @@ class ChildReleaseList extends Component {
     }
 
     handleSlider = (value) => {
-        console.log("slider Vlaue", value);
+        let releaseType = "IN PROGRESS"
+        if (value == 0) {
+            releaseType = "IN PROGRESS"
+        } else if (value == 100) {
+            releaseType = "RELEASED"
+        } else {
+            releaseType = "UNRELEASED"
+        }
+        console.log("On hcnafe of progress", value)
         this.setState({
-            editProgress: value
+            editProgress: value,
+            editStatus: releaseType
         })
     }
     handleStartDate = (date, str) => {
@@ -216,24 +209,18 @@ class ChildReleaseList extends Component {
         console.log("Form submit", record)
         console.log("Form submit this data", this.props.thisData)
         let { editstartDate, editEndDate, editDescription, editStatus, editProgress } = this.state;
-
-        console.log("editstartDate ", editstartDate)
-        console.log("editEndDate ", editEndDate)
-        console.log("editDescription ", editDescription)
-        console.log("editStatus ", editStatus)
-        console.log("editProgress ", editProgress)
-        console.log("Presnet Obj list form before")
-
-
         let temp = this.props.thisData;
+
+        console.log("while save >>>>>>>>>>>>>>", this.state)
+
         temp.childRelease.map(item => {
             if (item.key == record.key) {
                 item.key = record.key;
-                item.status = editStatus != "" ? editStatus : item.status;
-                item.progress = editProgress != "" ? editProgress : item.progress;
-                item.startDate = editstartDate != "" ? editstartDate : item.startDate;
-                item.endDate = editEndDate != "" ? editEndDate : item.endDate;
-                item.description = editDescription != "" ? editDescription : item.description;
+                item.status = editStatus;
+                item.progress = editProgress;
+                item.startDate = editstartDate;
+                item.endDate = editEndDate;
+                item.description = editDescription;
             }
         })
 
@@ -261,12 +248,35 @@ class ChildReleaseList extends Component {
 
 
 
+
+    componentWillReceiveProps(nextProps) {
+        console.log("NExgt Props", nextProps);
+        let { dataFromLS } = nextProps
+        console.log("data from lcoal", dataFromLS);
+
+        if (dataFromLS) {
+            this.setState({
+                listDataSrc: dataFromLS,
+                editingKey: ""
+            }, () => {
+                console.log("After setting state :", this.state.listDataSrc)
+            })
+        }
+    }
+
     cancel = () => {
         this.setState({ editingKey: '' });
     };
 
     edit(record) {
-        this.setState({ editingKey: record.key });
+        this.setState({
+            editingKey: record.key,
+            editStatus: record.status,
+            editProgress: record.progress,
+            editstartDate: record.startDate,
+            editEndDate: record.endDate,
+            editDescription: record.description
+        });
     }
 
     render() {

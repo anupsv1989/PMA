@@ -10,12 +10,11 @@ import ChildReleaseList from "./ChildReleaseList";
 import actions from "../redux/action";
 import { connect } from "react-redux";
 import { MenuOutlined } from '@ant-design/icons';
+import { statusDisplay, progressDisplay, dateFormat } from "../commons/helpers";
 
-
-
-const dateFormat = "DD-MM-YYYY";
 
 const { onFetchItem } = actions;
+
 
 class ReleaseList extends Component {
 
@@ -45,21 +44,14 @@ class ReleaseList extends Component {
                     dataIndex: 'status',
                     key: 'status',
                     editable: true,
+                    render: (rec) => statusDisplay(rec)
                 },
                 {
                     title: 'Progress',
                     dataIndex: 'progress',
                     key: 'progress',
                     editable: true,
-                    render: (rec) => (
-                        <Progress
-                            strokeColor={{
-                                '0%': '#108ee9',
-                                '100%': '#87d068',
-                            }}
-                            percent={rec}
-                        />
-                    ),
+                    render: (rec) => progressDisplay(rec)
                 },
                 {
                     title: 'Start Date',
@@ -110,7 +102,6 @@ class ReleaseList extends Component {
                             </span>
                         ) : (
                                 <Popover content={Content} title="Actions" trigger="hover">
-                                    {/* <Button>Hover me</Button> */}
                                     <MenuOutlined />
                                 </Popover>
                             );
@@ -125,7 +116,6 @@ class ReleaseList extends Component {
 
 
     addChildItem = (rec) => {
-        console.log("children ", rec)
         this.setState({
             modalVisible: true,
             currentRecord: rec
@@ -165,13 +155,12 @@ class ReleaseList extends Component {
 
         if (dataFromLS) {
             this.setState({
-                listDataSrc: dataFromLS
+                listDataSrc: dataFromLS,
+                editingKey: ""
+            }, () => {
+                console.log("After setting state :", this.state.listDataSrc)
             })
         }
-    }
-
-    shouldComponentUpdate() {
-        return true;
     }
 
 
@@ -185,16 +174,12 @@ class ReleaseList extends Component {
         children,
         ...restProps
     }) => {
-        // console.log("started 1", children)
-        // console.log("started 2", record)
-        // console.log("started 4", dataIndex)
-        // console.log("started 5", title)
         let inputNode;
 
 
         switch (dataIndex) {
             case "version":
-                inputNode = <Input defaultValue={record.version} name="version" onChange={this.handleVersion} />
+                inputNode = <Input defaultValue={record.version} name="version" onChange={(e) => this.handleVersionDesc(e, "editVersion")} />
                 break;
             case "startDate":
                 inputNode = <DatePicker name="startDate" defaultValue={moment(record.startDate, dateFormat)} onChange={this.handleStartDate} />
@@ -203,24 +188,23 @@ class ReleaseList extends Component {
                 inputNode = <DatePicker name="endDate" defaultValue={moment(record.endDate, dateFormat)} onChange={this.handleEndDate} />
                 break;
             case "description":
-                inputNode = <Input defaultValue={record.description} onChange={this.handleDescription} />
+                inputNode = <Input defaultValue={record.description} onChange={(e) => this.handleVersionDesc(e, "editDescription")} />
                 break;
             case "status":
                 inputNode =
-                    <Select style={{ width: 120 }} name="status" defaultValue={record.status} onChange={this.handleChange}>
+                    <Select style={{ width: 120 }} name="status" defaultValue={record.status} onChange={(e) => this.handleSelectSlider(e, "editStatus")}>
                         <Option value="IN PROGRESS">In Progress</Option>
                         <Option value="UNRELEASED">Unreleased</Option>
                         <Option value="RELEASED">Released</Option>
                     </Select>
-                // onChange = { handleChange }
                 break;
             case "progress":
-                inputNode = <Slider defaultValue={30} tooltipVisible name="progress" onChange={this.handleSlider} />
+                inputNode = <Slider defaultValue={0} tooltipVisible name="progress" onChange={(e) => this.handleSelectSlider(e, "editProgress")} />
                 break;
 
         }
 
-        // const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
+
         return (
             <td {...restProps}>
                 {editing ?
@@ -245,46 +229,33 @@ class ReleaseList extends Component {
                     )}
             </td>
         );
-        // }
+
     };
 
-    handleChange = (value) => {
-        console.log("Vlaue", value)
+
+    handleSelectSlider = (value, type) => {
         this.setState({
-            editStatus: value
+            [type]: value
         })
     }
 
-    handleSlider = (value) => {
-        console.log("slider Vlaue", value);
+    handleVersionDesc = (e, type) => {
         this.setState({
-            editProgress: value
+            [type]: e.target.value
         })
     }
+
     handleStartDate = (date, str) => {
-        console.log("sliceer sd str", str)
         this.setState({
             editstartDate: str
         })
     }
     handleEndDate = (date, str) => {
-        console.log("sliceer ed", str)
         this.setState({
             editEndDate: str
         })
     }
-    handleDescription = (e) => {
-        console.log("sliceer desc", e.target.value)
-        this.setState({
-            editDescription: e.target.value
-        })
-    }
-    handleVersion = (e) => {
-        console.log("sliceer vers", e.target.value)
-        this.setState({
-            editVersion: e.target.value
-        })
-    }
+
 
     isEditing = record => record.key === this.state.editingKey;
 
@@ -326,7 +297,9 @@ class ReleaseList extends Component {
     }
 
     edit(record) {
-        this.setState({ editingKey: record.key });
+        this.setState({
+            editingKey: record.key,
+        });
     }
 
     handleCancel = () => {
@@ -372,14 +345,14 @@ class ReleaseList extends Component {
             };
         });
 
-
+        console.log("After setting state in render:", this.state.listDataSrc)
 
         return (
             <>
                 <Form>
                     <Table
                         columns={columns}
-                        dataSource={listDataSrc}
+                        dataSource={this.props.dataFromLS}
                         components={components}
                         expandable={{
                             expandedRowRender: record => <ChildReleaseList thisData={record} />,
@@ -392,9 +365,10 @@ class ReleaseList extends Component {
                 </Form>
                 <AddParentRelease {...this.props} />
                 <Modal
-                    title="Basic Modal"
+                    title="Add Batch Release"
                     visible={this.state.modalVisible}
                     onOk={this.handleOk}
+                    footer={null}
                     closable
                     className="modal-Layout"
                     onCancel={this.handleCancel}
