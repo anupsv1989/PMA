@@ -25,7 +25,7 @@ class ReleaseList extends Component {
             editingKey: '',
             editVersion: "",
             editStatus: "",
-            editProgress: "",
+            editProgress: 0,
             editstartDate: "",
             editEndDate: "",
             editDescription: "",
@@ -126,16 +126,13 @@ class ReleaseList extends Component {
 
         let arr = JSON.parse(localStorage.getItem("parentReleaseData"));
 
-        console.log("Presnet Obj list form before ", arr)
         let index = arr.map(x => {
             return x.key;
         }).indexOf(rec.key);
         arr.splice(index, 1);
 
-
-        console.log("Presnet Obj list form after ", arr)
         localStorage.setItem('parentReleaseData', JSON.stringify(arr));
-        this.props.onFetchItem();
+        this.fetchItem();
 
     }
 
@@ -145,20 +142,16 @@ class ReleaseList extends Component {
         // this.setState({
         //     listDataSrc: getItems
         // })
-        this.props.onFetchItem();
+        this.fetchItem();
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log("NExgt Props", nextProps);
         let { dataFromLS } = nextProps
-        console.log("data from lcoal", dataFromLS);
 
         if (dataFromLS) {
             this.setState({
                 listDataSrc: dataFromLS,
                 editingKey: ""
-            }, () => {
-                console.log("After setting state :", this.state.listDataSrc)
             })
         }
     }
@@ -176,7 +169,6 @@ class ReleaseList extends Component {
     }) => {
         let inputNode;
 
-
         switch (dataIndex) {
             case "version":
                 inputNode = <Input defaultValue={record.version} name="version" onChange={(e) => this.handleVersionDesc(e, "editVersion")} />
@@ -188,18 +180,20 @@ class ReleaseList extends Component {
                 inputNode = <DatePicker name="endDate" defaultValue={moment(record.endDate, dateFormat)} onChange={this.handleEndDate} />
                 break;
             case "description":
+
                 inputNode = <Input defaultValue={record.description} onChange={(e) => this.handleVersionDesc(e, "editDescription")} />
                 break;
             case "status":
                 inputNode =
-                    <Select style={{ width: 120 }} name="status" defaultValue={record.status} onChange={(e) => this.handleSelectSlider(e, "editStatus")}>
+                    <Select style={{ width: 120 }} name="status" defaultValue={this.state.editStatus} onChange={(e) => this.handleSelectSlider(e, "editStatus")}>
                         <Option value="IN PROGRESS">In Progress</Option>
                         <Option value="UNRELEASED">Unreleased</Option>
                         <Option value="RELEASED">Released</Option>
                     </Select>
                 break;
             case "progress":
-                inputNode = <Slider defaultValue={0} tooltipVisible name="progress" onChange={(e) => this.handleSelectSlider(e, "editProgress")} />
+                inputNode = <Slider defaultValue={this.state.editProgress == "" ? 0 : this.state.editProgress} tooltipVisible name="progress"
+                    onChange={(e) => this.handleSelectSlider(e, "editProgress")} />
                 break;
 
         }
@@ -210,7 +204,7 @@ class ReleaseList extends Component {
                 {editing ?
                     (
                         <Form.Item
-                            name={dataIndex}
+                            name={record.key + "_" + dataIndex}
                             style={{ margin: 0 }}
                             rules={[
                                 {
@@ -231,6 +225,8 @@ class ReleaseList extends Component {
         );
 
     };
+
+
 
 
     handleSelectSlider = (value, type) => {
@@ -264,25 +260,21 @@ class ReleaseList extends Component {
     };
 
     save(record) {
-        console.log("Form submit", record)
         let { editVersion, editstartDate, editEndDate, editDescription, editStatus, editProgress, listDataSrc } = this.state;
-
-        console.log("Presnet Obj list form before", listDataSrc)
-
 
         listDataSrc.map(item => {
             if (item.key == record.key) {
                 item.key = record.key;
                 item.childRelease = item.childRelease;
-                item.version = editVersion != "" ? editVersion : item.version;
-                item.status = editStatus != "" ? editStatus : item.status;
-                item.progress = editProgress != "" ? editProgress : item.progress;
-                item.startDate = editstartDate != "" ? editstartDate : item.startDate;
-                item.endDate = editEndDate != "" ? editEndDate : item.endDate;
-                item.description = editDescription != "" ? editDescription : item.description;
+                item.version = editVersion;
+                item.status = editStatus;
+                item.progress = editProgress;
+                item.startDate = editstartDate;
+                item.endDate = editEndDate;
+                item.description = editDescription;
             }
         })
-        console.log("Presnet Obj list form after ", listDataSrc)
+
         localStorage.setItem('parentReleaseData', JSON.stringify(listDataSrc));
         this.setState({
             editStatus: "",
@@ -292,13 +284,20 @@ class ReleaseList extends Component {
             editEndDate: "",
             editDescription: "",
         })
-        this.props.onFetchItem();
+        this.fetchItem();
 
     }
 
     edit(record) {
+
         this.setState({
             editingKey: record.key,
+            editStatus: record.status,
+            editProgress: record.progress,
+            editstartDate: record.startDate,
+            editVersion: record.version,
+            editEndDate: record.endDate,
+            editDescription: record.description,
         });
     }
 
@@ -314,12 +313,15 @@ class ReleaseList extends Component {
         })
     }
 
+    fetchItem = () => {
 
+        console.log("on fetch item call back")
+        this.props.onFetchItem();
+    }
 
 
     render() {
 
-        console.log("data back from redux ++++ ", this.props.dataFromLS)
 
         let { listDataSrc } = this.state;
 
@@ -345,7 +347,7 @@ class ReleaseList extends Component {
             };
         });
 
-        console.log("After setting state in render:", this.state.listDataSrc)
+
 
         return (
             <>
@@ -355,7 +357,7 @@ class ReleaseList extends Component {
                         dataSource={this.props.dataFromLS}
                         components={components}
                         expandable={{
-                            expandedRowRender: record => <ChildReleaseList thisData={record} />,
+                            expandedRowRender: record => <ChildReleaseList thisData={record} refreshCallBack={this.fetchItem} />,
                         }}
                         rowClassName="editable-row"
                         pagination={{
@@ -363,7 +365,7 @@ class ReleaseList extends Component {
                         }}
                     />
                 </Form>
-                <AddParentRelease {...this.props} />
+                <AddParentRelease {...this.props} refreshCallBack={this.fetchItem} />
                 <Modal
                     title="Add Batch Release"
                     visible={this.state.modalVisible}
@@ -373,7 +375,7 @@ class ReleaseList extends Component {
                     className="modal-Layout"
                     onCancel={this.handleCancel}
                 >
-                    <AddChildRelease thisData={this.state.currentRecord} closeModal={this.handleOk} dbData={listDataSrc} />
+                    <AddChildRelease thisData={this.state.currentRecord} closeModal={this.handleOk} dbData={listDataSrc} refreshCallBack={this.fetchItem} />
                 </Modal>
 
             </>

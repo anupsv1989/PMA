@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import { Form, Input, Button, Row, Col, DatePicker } from 'antd';
 import { dateFormat } from "../commons/helpers"
-import { connect } from "react-redux";
-import actions from "../redux/action";
 import moment from 'moment';
-const { onFetchItem } = actions;
 
 const layout = {
     labelCol: { span: 8 },
@@ -15,7 +12,7 @@ const tailLayout = {
 };
 
 
-class AddParentRelease extends Component {
+export default class AddParentRelease extends Component {
 
     constructor(props) {
         super(props);
@@ -41,16 +38,16 @@ class AddParentRelease extends Component {
         console.log("Date", values['startDate']);
 
 
-
-
+        let defDate = new Date();
+        console.log("Date", moment(defDate).format(dateFormat));
         let arr = this.state.localPRItems;
         let prObj = {
             key: new Date().getTime(),
             version: values.version,
             status: "",
-            progress: "",
-            startDate: values['startDate'] ? values['startDate'].format(dateFormat) : '',
-            endDate: values['endDate'] ? values['endDate'].format(dateFormat) : '',
+            progress: 0,
+            startDate: values['startDate'] ? values['startDate'].format(dateFormat) : moment(defDate).format(dateFormat),
+            endDate: values['endDate'] ? values['endDate'].format(dateFormat) : moment(defDate).format(dateFormat),
             description: values.description,
             childRelease: []
         }
@@ -59,7 +56,8 @@ class AddParentRelease extends Component {
         console.log("arr", arr)
         arr.push(prObj);
         localStorage.setItem("parentReleaseData", JSON.stringify(arr))
-        this.props.onFetchItem();
+
+        this.props.refreshCallBack();
     }
 
 
@@ -126,13 +124,3 @@ class AddParentRelease extends Component {
 }
 
 
-const mapStateToProps = state => {
-    console.log("map event")
-    return {
-        dataFromLS: state.dataFromLS
-    };
-};
-
-export default connect(
-    mapStateToProps, { onFetchItem }
-)(AddParentRelease);

@@ -1,15 +1,8 @@
 import React, { Component } from "react";
 import { Form, Input, Button, Row, Col, DatePicker, Select, Slider } from 'antd';
 import { dateFormat } from "../commons/helpers";
-import { connect } from "react-redux";
-import actions from "../redux/action";
 import moment from 'moment';
 
-const { onFetchItem } = actions;
-const layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
-};
 const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
 };
@@ -44,16 +37,18 @@ export default class AddChildRelease extends Component {
         let { thisData, dbData } = this.props;
         console.log("on ifinsh", values);
 
+        let defDate = new Date();
+        console.log("parent Object after adding defDate", defDate);
 
-        console.log("parent Object after adding", thisData);
+        console.log("parent Object after adding defDate", defDate);
         let arr = dbData;
         arr.map(item => {
             if (item.key == thisData.key) {
                 let temp = {
                     key: "cr" + new Date().getTime(),
                     status: values.status,
-                    startDate: values['startDate'] ? values['startDate'].format(dateFormat) : "",
-                    endDate: values['endDate'] ? values['endDate'].format(dateFormat) : "",
+                    startDate: values['startDate'] ? values['startDate'].format(dateFormat) : moment(defDate).format(dateFormat),
+                    endDate: values['endDate'] ? values['endDate'].format(dateFormat) : moment(defDate).format(dateFormat),
                     description: values.description,
                     progress: values.progress
                 }
@@ -63,16 +58,13 @@ export default class AddChildRelease extends Component {
 
         console.log("final Array in db", arr)
         localStorage.setItem("parentReleaseData", JSON.stringify(arr))
-        // this.props.onFetchItem();
+        this.props.refreshCallBack();
         this.props.closeModal();
 
     }
 
 
 
-    onFinishFailed = () => {
-        console.log("on ifinsh failed")
-    }
     render() {
         return (
             <div>
@@ -143,4 +135,5 @@ export default class AddChildRelease extends Component {
         )
     }
 }
+
 

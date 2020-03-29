@@ -3,14 +3,11 @@ import {
     Table, Popconfirm, Popover, Row, Col, Button, Tag,
     Input, Select, Slider, DatePicker, Form, Progress
 } from "antd";
-import { connect } from "react-redux";
-import actions from "../redux/action";
 import moment from 'moment';
 import { EllipsisOutlined, EditOutlined } from '@ant-design/icons';
 import { statusDisplay, progressDisplay, dateFormat } from "../commons/helpers";
-const { onFetchItem } = actions;
 
-class ChildReleaseList extends Component {
+export default class ChildReleaseList extends Component {
 
 
     constructor(props) {
@@ -237,13 +234,14 @@ class ChildReleaseList extends Component {
         console.log("Presnet Obj list form after ", arr)
         localStorage.setItem('parentReleaseData', JSON.stringify(arr));
         this.setState({
+            editingKey: "",
             editStatus: "",
             editProgress: "",
             editstartDate: "",
             editEndDate: "",
             editDescription: "",
         })
-        this.props.onFetchItem();
+        this.props.refreshCallBack();
     }
 
 
@@ -316,12 +314,4 @@ class ChildReleaseList extends Component {
 
 }
 
-const mapStateToProps = state => {
-    return {
-        dataFromLS: state.dataFromLS
-    };
-};
 
-export default connect(
-    mapStateToProps, { onFetchItem }
-)(ChildReleaseList);
