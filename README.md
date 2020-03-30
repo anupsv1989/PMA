@@ -16,3 +16,6 @@ Project management app
 # To run the app in prod
 * npm run build
 * npm run start
+
+# DB Used
+* Localstorage
