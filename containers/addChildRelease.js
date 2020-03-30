@@ -7,6 +7,8 @@ const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
 };
 
+// To add items for child / expandables release listing
+// Expects - props from parent - callback method to call on save
 
 export default class AddChildRelease extends Component {
 
@@ -20,27 +22,21 @@ export default class AddChildRelease extends Component {
 
     componentDidMount() {
 
-        console.log("this props >>>>>>>>>>>>>>>>.", this.props)
-
         let chkItem = JSON.parse(localStorage.getItem("parentReleaseData"));
         let getItems = chkItem == null ? [] : chkItem;
         this.setState({
             localPRItems: getItems
         })
-        console.log("DID mount", getItems)
-        console.log("DID mount localPRItems", this.state.localPRItems)
+
     }
 
     onFinish = (values) => {
 
-        console.log("this props >>>>>>>>>>>>>>>>.", this.props)
+
         let { thisData, dbData } = this.props;
-        console.log("on ifinsh", values);
 
         let defDate = new Date();
-        console.log("parent Object after adding defDate", defDate);
 
-        console.log("parent Object after adding defDate", defDate);
         let arr = dbData;
         arr.map(item => {
             if (item.key == thisData.key) {
@@ -56,7 +52,7 @@ export default class AddChildRelease extends Component {
             }
         });
 
-        console.log("final Array in db", arr)
+
         localStorage.setItem("parentReleaseData", JSON.stringify(arr))
         this.props.refreshCallBack();
         this.props.closeModal();

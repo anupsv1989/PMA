@@ -15,7 +15,9 @@ import { statusDisplay, progressDisplay, dateFormat } from "../commons/helpers";
 
 const { onFetchItem } = actions;
 
-
+// Main release listing page
+// Expects - redux for listing object
+// Caters other components and passes props such as data and redux methods
 class ReleaseList extends Component {
 
     constructor(props) {

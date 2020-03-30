@@ -2,6 +2,8 @@ import { Tag, Progress } from "antd";
 
 export const dateFormat = "DD-MM-YYYY";
 
+
+// returns color codes for status
 export const statusDisplay = (rec) => {
 
     switch (rec) {
@@ -28,7 +30,7 @@ export const statusDisplay = (rec) => {
 
 }
 
-
+// returns progress bar
 export const progressDisplay = (rec) => {
     return (
         <Progress

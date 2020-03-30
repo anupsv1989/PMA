@@ -7,6 +7,9 @@ import moment from 'moment';
 import { EllipsisOutlined, EditOutlined } from '@ant-design/icons';
 import { statusDisplay, progressDisplay, dateFormat } from "../commons/helpers";
 
+
+// Items for child release listing
+// Expects - props from parent - callback method to call on save
 export default class ChildReleaseList extends Component {
 
 
@@ -97,13 +100,7 @@ export default class ChildReleaseList extends Component {
         children,
         ...restProps
     }) => {
-        // console.log("started 1", children)
-        // console.log("started 2", record)
-        // console.log("started 4", dataIndex)
-        // console.log("started 5", title)
         let inputNode;
-
-
 
         switch (dataIndex) {
             case "version":
@@ -128,13 +125,14 @@ export default class ChildReleaseList extends Component {
                 break;
         }
 
-        // const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
+
         return (
             <td {...restProps}>
                 {editing ?
+
                     (
                         <Form.Item
-                            name={dataIndex}
+                            name={record.key + "__" + dataIndex}
                             style={{ margin: 0 }}
                             rules={[
                                 {
@@ -156,10 +154,6 @@ export default class ChildReleaseList extends Component {
         // }
     };
 
-    fetchStatusDisp = (rec) => {
-
-
-    }
 
     handleChange = (value) => {
         console.log("Vlaue", value)
@@ -177,38 +171,31 @@ export default class ChildReleaseList extends Component {
         } else {
             releaseType = "UNRELEASED"
         }
-        console.log("On hcnafe of progress", value)
         this.setState({
             editProgress: value,
             editStatus: releaseType
         })
     }
     handleStartDate = (date, str) => {
-        console.log("sliceer sd str", str)
+
         this.setState({
             editstartDate: str
         })
     }
     handleEndDate = (date, str) => {
-        console.log("sliceer ed", str)
         this.setState({
             editEndDate: str
         })
     }
     handleDescription = (e) => {
-        console.log("sliceer desc", e.target.value)
         this.setState({
             editDescription: e.target.value
         })
     }
 
     save(record) {
-        console.log("Form submit", record)
-        console.log("Form submit this data", this.props.thisData)
         let { editstartDate, editEndDate, editDescription, editStatus, editProgress } = this.state;
         let temp = this.props.thisData;
-
-        console.log("while save >>>>>>>>>>>>>>", this.state)
 
         temp.childRelease.map(item => {
             if (item.key == record.key) {
@@ -231,7 +218,6 @@ export default class ChildReleaseList extends Component {
         arr.unshift(addData);
 
         // debugger;
-        console.log("Presnet Obj list form after ", arr)
         localStorage.setItem('parentReleaseData', JSON.stringify(arr));
         this.setState({
             editingKey: "",
@@ -248,16 +234,12 @@ export default class ChildReleaseList extends Component {
 
 
     componentWillReceiveProps(nextProps) {
-        console.log("NExgt Props", nextProps);
-        let { dataFromLS } = nextProps
-        console.log("data from lcoal", dataFromLS);
+        let { dataFromLS } = nextProps;
 
         if (dataFromLS) {
             this.setState({
                 listDataSrc: dataFromLS,
                 editingKey: ""
-            }, () => {
-                console.log("After setting state :", this.state.listDataSrc)
             })
         }
     }

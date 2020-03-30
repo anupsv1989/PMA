@@ -11,8 +11,10 @@ const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
 };
 
+// To add items for main release listing
+// Expects - props from parent - callback method to call on save
 
-export default class AddParentRelease extends Component {
+export default class AddParentRelease extends React.PureComponent {
 
     constructor(props) {
         super(props);
@@ -28,18 +30,12 @@ export default class AddParentRelease extends Component {
         this.setState({
             localPRItems: getItems
         })
-        console.log("DID mount", getItems)
-        console.log("DID mount localPRItems", this.state.localPRItems)
     }
 
     onFinish = (values) => {
 
-        console.log("on ifinsh", values);
-        console.log("Date", values['startDate']);
-
 
         let defDate = new Date();
-        console.log("Date", moment(defDate).format(dateFormat));
         let arr = this.state.localPRItems;
         let prObj = {
             key: new Date().getTime(),
@@ -52,8 +48,6 @@ export default class AddParentRelease extends Component {
             childRelease: []
         }
 
-        console.log("prObj", prObj);
-        console.log("arr", arr)
         arr.push(prObj);
         localStorage.setItem("parentReleaseData", JSON.stringify(arr))
 
@@ -62,18 +56,15 @@ export default class AddParentRelease extends Component {
 
 
 
-    onFinishFailed = () => {
-        console.log("on ifinsh failed")
-    }
+
     render() {
         return (
             <div>
 
                 <Form
                     name="basic"
-                    initialValues={{ remember: true }}
+                    initialValues={{ remember: false }}
                     onFinish={this.onFinish}
-                    onFinishFailed={this.onFinishFailed}
                 >
                     <div className="parent-release-sec">
                         <Row>
