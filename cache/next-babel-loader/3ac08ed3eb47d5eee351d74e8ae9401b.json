@@ -1,0 +1,1 @@
+{"ast":null,"code":"export default reducer;","map":{"version":3,"sources":["D:/RandDChamber/LogwardAssignment/ProjectManagement/PMA/redux/reducer.js"],"names":["reducer"],"mappings":"AAAA,eAAeA,OAAf","sourcesContent":["export default reducer;"]},"metadata":{},"sourceType":"module"}
